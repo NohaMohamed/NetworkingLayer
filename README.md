@@ -1,3 +1,3 @@
 # NetworkingLayer
 
-NetworkingLAyer is an HTTP networking package written in Swift.
+NetworkingLayer is an HTTP networking package written in Swift.
