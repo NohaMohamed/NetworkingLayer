@@ -10,7 +10,7 @@ import Foundation
 public enum CustomNetworkError: Error, LocalizedError {
     
     init(error: Error) {
-        self = .unknowen("vlaue")
+        self = .unknowen(Localization.string(for: .errorMessageGeneric))
     }
     
     case canNotMapRequest
