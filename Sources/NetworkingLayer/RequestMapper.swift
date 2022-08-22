@@ -20,18 +20,16 @@ struct RequestMapper {
             let method = request.method
             urlRequest.httpMethod = method.rawValue
             
-            if method == .get {
-                urlRequest.allHTTPHeaderFields = request.headers
-                urlRequest.httpMethod = method.rawValue
-                let queryItems = request.parameters?.map {
-                    URLQueryItem(name: $0, value: $1)
-                }
-                if let items = queryItems {
-                    urlRequest.addQuery(query: items)}
-                return urlRequest
+            urlRequest.allHTTPHeaderFields = request.headers
+            urlRequest.httpMethod = method.rawValue
+            let queryItems = request.parameters?.map {
+                URLQueryItem(name: $0, value: $1)
             }
-            
+            if let items = queryItems {
+                urlRequest.addQuery(query: items)}
             return urlRequest
+            
+            
         }
         throw CustomNetworkError.canNotMapRequest
     }
