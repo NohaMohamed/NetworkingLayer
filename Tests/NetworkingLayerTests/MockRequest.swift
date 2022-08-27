@@ -9,6 +9,8 @@ import Foundation
 import NetworkingLayer
 
 struct MockRequest: RequestProtocol {
+    var cacheRequest: Bool?
+    
     var headers: HTTPHeaders?
     
     var baseURL: String = ""

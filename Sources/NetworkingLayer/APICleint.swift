@@ -74,9 +74,9 @@ extension APICleint: APICleintProtocol {
     func getCachedResponse(request: URLRequest, completion: @escaping (Result<Data, CustomNetworkError>) -> Void) {
         let data = urlCache.cachedResponse(for: request)?.data
         guard let data = data else {
-            completion(.failure(.generic)
+            completion(.failure(.generic))
             return }
-        completion(.success(decodeResult))
+        completion(.success(data))
         
     }
 }
