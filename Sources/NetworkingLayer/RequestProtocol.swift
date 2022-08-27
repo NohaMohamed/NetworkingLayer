@@ -27,5 +27,6 @@ public protocol RequestProtocol {
     var method: HTTPMethod { get }
     var headers: HTTPHeaders? { get }
     var parameters: Parameters? { get }
+    var cacheRequest: Bool? { get }
 }
 
