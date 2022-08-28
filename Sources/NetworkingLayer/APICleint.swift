@@ -40,11 +40,13 @@ extension APICleint: APICleintProtocol {
                     }
                 case .failure(let error):
                     print("Failed to get cahed request\(error)")
+                    self.callRequest(request: request, compeletion: compeletion)
                    
                 }
             }
         }else{
             
+            callRequest(request: request, compeletion: compeletion)
         }
         
     }
