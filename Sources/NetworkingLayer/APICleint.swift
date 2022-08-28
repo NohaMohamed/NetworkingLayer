@@ -82,8 +82,8 @@ extension APICleint: APICleintProtocol {
             cache.setObject(data as NSData, forKey: url)
     }
     func getCachedResponse(requestURL : NSString, completion: @escaping (Result<Data, CustomNetworkError>) -> Void) {
-            if let obj = cache.object(forKey: requestURL) as? Data{
-                completion(.success(obj))
+            if let cachedData = cache.object(forKey: requestURL) as? Data{
+                completion(.success(cachedData))
             }else{
                 completion(.failure(.generic))
             }

@@ -22,11 +22,17 @@ struct RequestMapper {
             
             urlRequest.allHTTPHeaderFields = request.headers
             urlRequest.httpMethod = method.rawValue
-            let queryItems = request.parameters?.map {
+            let sortedParameters = request.parameters?.sorted(by: { $0.0 < $1.0 })
+
+            let queryItems = sortedParameters?.map {
                 URLQueryItem(name: $0, value: $1)
             }
             if let items = queryItems {
-                urlRequest.addQuery(query: items)}
+                urlRequest.addQuery(query: items)
+                
+                
+            }
+            
             return urlRequest
             
             
