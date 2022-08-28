@@ -16,6 +16,8 @@ open class APICleint {
     public static let shared = APICleint()
     
     private init() {}
+    
+    let cache = NSCache<NSString,NSData>()
 }
 
 extension APICleint: APICleintProtocol {
@@ -66,15 +68,16 @@ extension APICleint: APICleintProtocol {
         
     }
     func cacheRequest(data: Data, response: URLResponse, request: URLRequest) {
-        let cachedResponse = CachedURLResponse(response: response, data: data)
-        URLCache.shared.storeCachedResponse(cachedResponse, for: request)
+        if  let url = request.url?.absoluteString as? NSString {
+            cache.setObject(data as NSData, forKey: url)}
     }
     func getCachedResponse(request: URLRequest, completion: @escaping (Result<Data, CustomNetworkError>) -> Void) {
-        let data = URLCache.shared.cachedResponse(for: request)?.data
-        guard let data = data else {
-            completion(.failure(.generic))
-            return }
-        completion(.success(data))
+        if let req = request.url?.absoluteString as? NSString {
+            if let obj = cache.object(forKey: req) as? Data{
+                completion(.success(obj))
+            }
+
+        }
         
     }
 }
